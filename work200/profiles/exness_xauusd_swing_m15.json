@@ -1,0 +1,11 @@
+{
+  "name": "exness-xauusd-swing-m15",
+  "venue": "EXNESS",
+  "market": "CFD",
+  "symbol": "XAUUSD",
+  "timeframe": "15m",
+  "execution_mode": "SIGNAL_ONLY",
+  "live_execution": false,
+  "paper_only": true,
+  "description": "Reference configuration for MQL5 Swing signal review. Not compatible with spot-only PaperBroker; no order execution."
+}

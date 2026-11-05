@@ -1,0 +1,11 @@
+{
+  "name": "okx-btcusdt-spot-15m",
+  "venue": "OKX",
+  "market": "SPOT",
+  "symbol": "BTCUSDT",
+  "timeframe": "15m",
+  "execution_mode": "SIGNAL_ONLY",
+  "live_execution": false,
+  "paper_only": true,
+  "description": "Python-only research and paper spot. SELL requires existing holdings; no short selling."
+}
