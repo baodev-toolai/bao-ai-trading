@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import UserLayer from "./UserLayer";
 
 const nav = [
   ["OPERATIONS", "Dashboard", "⌂"], ["", "Markets", "◈"], ["", "Watchlist", "☆"],
@@ -7,7 +8,7 @@ const nav = [
   ["AI", "AI Command Center", "✦"], ["", "Signals", "⌁"], ["", "Agents", "◎"], ["", "Memory", "◉"],
   ["INFRASTRUCTURE", "Harness", "◇"], ["", "MCP Tools", "⌘"],
   ["RISK", "Risk Center", "△"], ["", "Execution", "↗"],
-  ["SYSTEM", "Accounts", "▣"], ["", "Settings", "⚙"],
+  ["SYSTEM", "Accounts", "▣"], ["", "Broker Connections", "⌁"], ["", "Work 200 Verification", "✓"], ["", "Settings", "⚙"],
 ];
 
 const assets = [
@@ -47,7 +48,6 @@ export default function App() {
   const [active,setActive]=useState("Dashboard");
   const [menu,setMenu]=useState(false);
   const [command,setCommand]=useState(false);
-  const [kill,setKill]=useState(false);
 
   return <div className="app">
     <aside className={`sidebar ${menu?"open":""}`}>
@@ -62,9 +62,11 @@ export default function App() {
     {menu&&<button className="backdrop" onClick={()=>setMenu(false)}/>}
     <main>
       <header><div className="lefthead"><button className="hamb" onClick={()=>setMenu(true)}>☰</button><span>AI TRADE</span><i>/</i><b>{active}</b></div>
-        <div className="top-actions"><button className="command" onClick={()=>setCommand(true)}>⌘ <span>Command</span><kbd>⌘ K</kbd></button><label className="status green">● AI ONLINE</label><label className="status amber">● RISK NOMINAL</label><button className="bell">◌</button><div className="topavatar">B</div></div>
+        <div className="top-actions"><button className="command" onClick={()=>setCommand(true)}>⌘ <span>Command</span><kbd>⌘ K</kbd></button><label className="status amber">● DEMO DATA / DỮ LIỆU MẪU</label><button className="bell">◌</button><div className="topavatar">B</div></div>
       </header>
       <div className="content">
+        {active === "Broker Connections" || active === "Work 200 Verification" ? <UserLayer page={active} /> : <>
+        <div role="status" style={{padding:"10px 14px",border:"1px solid #f59e0b55",borderRadius:8,color:"#f6cf8a",background:"#f59e0b0d",fontSize:12,marginBottom:12}}>BAOXTRA V3.1 — DEMO / MOCK DATA ONLY. No live broker connection, no verified P&amp;L, no backend kill switch. REVIEW_ONLY.</div>
         <section className="heading"><div><label>— COMMAND OVERVIEW</label><h1>Good morning, <span>Trader.</span></h1><p>Your AI trading system is operating within configured safety boundaries.</p></div><div className="heading-buttons"><b>● Markets Open</b><button onClick={()=>setCommand(true)}>✦ AI Command</button></div></section>
 
         <section className="metrics">
@@ -95,8 +97,9 @@ export default function App() {
 
         <section className="two-col bottom">
           <article className="panel"><div className="panel-head"><div><label>AUDIT STREAM</label><h2>AI Decision Timeline</h2></div><button className="link" onClick={()=>setActive("Harness")}>Open audit →</button></div><div className="timeline">{[["09:31:04","Market data received","XAUUSD M15 · liquidity normal","blue"],["09:31:05","Technical Agent completed","Trend structure: bullish","cyan"],["09:31:06","Macro Agent completed","USD pressure easing","purple"],["09:31:07","Planner is evaluating","Building candidate trade plan","amber"]].map(e=><div key={e[0]}><i className={e[3]}/><time>{e[0]}</time><p><b>{e[1]}</b><small>{e[2]}</small></p><span>•••</span></div>)}</div></article>
-          <article className="panel risk-panel"><div className="panel-head"><div><label>RISK ENGINE</label><h2>Guard Status</h2></div><strong className="nominal">● NOMINAL</strong></div><div className="riskbar"><div><span>42%</span></div><p><b>Risk utilization</b><small>4.2% / 10.0% maximum</small></p></div><div className="riskstats"><div><span>Daily Loss</span><b>$182 / $1,000</b></div><div><span>Margin</span><b>18.4%</b></div><div><span>Exposure</span><b>$42,680</b></div></div><button className={`kill ${kill?"armed":""}`} onClick={()=>setKill(!kill)}>⏻ {kill?"KILL SWITCH ARMED":"EMERGENCY KILL SWITCH"}</button></article>
+          <article className="panel risk-panel"><div className="panel-head"><div><label>RISK ENGINE</label><h2>Guard Status</h2></div><strong className="nominal">● NOMINAL</strong></div><div className="riskbar"><div><span>42%</span></div><p><b>Risk utilization</b><small>4.2% / 10.0% maximum</small></p></div><div className="riskstats"><div><span>Daily Loss</span><b>$182 / $1,000</b></div><div><span>Margin</span><b>18.4%</b></div><div><span>Exposure</span><b>$42,680</b></div></div><button className="kill" disabled title="UI preview only — backend kill switch not implemented">⏻ STOP CONTROL UNAVAILABLE — UI ONLY</button></article>
         </section>
+        </>}
       </div>
     </main>
 
